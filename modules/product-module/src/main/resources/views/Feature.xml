@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	
+	<grid model="com.axelor.product.db.Feature" title="Features" name="feature-grid">
+		<field name="feature"/>
+		<field name="product"/>
+	</grid>
+	
+	<form model="com.axelor.product.db.Feature" title="Feature" name="feature-form">
+		<panel>
+			<field name="feature"/>
+			<field name="product"/>
+		</panel>
+	</form>
+	
+</object-views>

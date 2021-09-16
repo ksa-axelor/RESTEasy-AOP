@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	
+	<menuitem title="RESTEasy - AOP" name="product-root"/>
+	
+	<menuitem title="Product" name="product-root-product" parent="product-root" action="action.product.root.product"/>
+	<action-view name="action.product.root.product" title="Product" model="com.axelor.product.db.Product" >
+		<view type="grid" name="product-grid" />
+		<view type="form" name="product-form" />
+	</action-view>
+	
+	<menuitem title="Accessory" name="product-root-accessory" parent="product-root" action="action.product.root.accessory"/>
+	<action-view name="action.product.root.accessory" title="Accessory" model="com.axelor.product.db.Accessory" >
+		<view type="grid" name="accessory-grid" />
+		<view type="form" name="accessory-form" />
+	</action-view>
+	
+	<menuitem title="Feature" name="product-root-feature" parent="product-root" action="action.product.root.feature"/>
+	<action-view name="action.product.root.feature" title="Feature" model="com.axelor.product.db.Feature" >
+		<view type="grid" name="feature-grid" />
+		<view type="form" name="feature-form" />
+	</action-view>
+	
+</object-views>

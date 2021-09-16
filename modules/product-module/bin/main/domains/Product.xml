@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models 
+  http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+  
+  <module name="product" package="com.axelor.product.db"/>
+  
+  <sequence name="product.reference" increment="1" initial="1" padding="3" prefix="SE" suffix="EXE"/>
+  
+  <entity name="Product" lang="java">
+  	<string name="reference" title="Reference" sequence="product.reference" readonly="true"/>
+  	<string name="pname" title="Product Name" namecolumn="true"/>
+  	<string name="pvalue" title="Product Value"/>
+  	<integer name="rating" title="Rating"/>
+  	
+  	<one-to-one ref="com.axelor.product.db.Accessory" name="accessory" mappedBy="product"/>
+  	<one-to-many ref="com.axelor.product.db.Feature" name="feature" title="Features of Product" mappedBy="product"/>
+  </entity>
+  
+</domain-models>

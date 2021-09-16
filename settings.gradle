@@ -1,0 +1,3 @@
+rootProject.name = 'resteasy-aop'
+
+include "modules:product-module"
