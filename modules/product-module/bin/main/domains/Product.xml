@@ -11,12 +11,23 @@
   
   <entity name="Product" lang="java">
   	<string name="reference" title="Reference" sequence="product.reference" readonly="true"/>
-  	<string name="pname" title="Product Name" namecolumn="true"/>
-  	<string name="pvalue" title="Product Value"/>
-  	<integer name="rating" title="Rating"/>
+  	<string name="pname" title="Product Name" namecolumn="true" initParam="true"/>
+  	<string name="pvalue" title="Product Value" initParam="true"/>
+  	<string name="ratingType" title="Rate This Product" selection="product.product.rating.type"/>
   	
   	<one-to-one ref="com.axelor.product.db.Accessory" name="accessory" mappedBy="product"/>
-  	<one-to-many ref="com.axelor.product.db.Feature" name="feature" title="Features of Product" mappedBy="product"/>
+  	<one-to-many ref="com.axelor.product.db.Feature" name="featureList" mappedBy="product" initParam="true"/>
+  	
+  	<finder-method name="findByName" using="pname"/>
+  	<extra-code>
+  		<![CDATA[
+  			//rating Type
+  			public static final String RATING_TYPE_EXCELLENT = "excellent";
+  			public static final String RATING_TYPE_GOOD = "good";
+  			public static final String RATING_TYPE_AVERAGE = "average";
+  			public static final String RATING_TYPE_BAD = "bad";
+  		]]>
+  	</extra-code>
   </entity>
   
 </domain-models>

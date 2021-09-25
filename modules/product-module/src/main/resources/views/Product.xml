@@ -4,24 +4,59 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
 	
-	<grid model="com.axelor.product.db.Product" title="Products" name="product-grid">
+	<grid model="com.axelor.product.db.Product" title="Products" name="product-grid"> <!-- Use editable="true" for O2M -->
 		<field name="reference"/>
 		<field name="pname"/>
-		<field name="pvalue"/>
-		<field name="rating"/>
+		<field name="pvalue" aggregate="sum"/>
+		<field name="ratingType"/>
 		<field name="accessory"/>
-		<field name="feature"/>
+		<field name="featureList"/>
+		<button onClick="click" prompt="Are you sure ?"  name="clickBtn" title="click Here" icon="fa-print" />
 	</grid>
 	
-	<form model="com.axelor.product.db.Product" title="Product" name="product-form">
-		<panel>
-			<field name="reference"/>
-			<field name="pname"/>
-			<field name="pvalue"/>
-			<field name="rating"/>
-			<field name="accessory"/>
-			<panel-related field="feature"/>
+	<form model="com.axelor.product.db.Product" title="Product" name="product-form" onNew="action-product-onnew" width="large">
+		<panel name="mainPanel">
+			<panel name="mainPanel1" title="Main Panel" colSpan="8">
+				<field name="reference"/>
+				<field name="pname"/>
+				<field name="pvalue"/>
+				<field name="ratingType" showTitle="false" widget="NavSelect" colSpan="8"/>
+			</panel>
+			<panel name="sidePanel" title="Side Panel" colSpan="4" itemSpan="12">
+				<field name="accessory"/>
+				<panel-related field="featureList" form-view="product_feature_form" grid-view="product_feature_grid" canNew="true" canEdit="true" canRemove="true" 
+				canSuggest="true" showFrame="true" canMove="true" orderBy="sequence" x-selector="checkbox"/>
+			</panel>  
+			<panel name="editorPanel" title="Editor Panel" colSpan="6">
+				<field name="featureList" colSpan="12">
+					<editor x-viewer="true">
+						<field name="feature"/>
+						<field name="product"/>
+					</editor>
+				</field>
+			</panel>
+			<panel name="viewerPanel" title="Viewer Panel" colSpan="6">
+				<field name="pname" colSpan="6">
+					<viewer>
+						<![CDATA[
+							<strong>{{record.pname}}</strong>
+						]]>
+					</viewer>
+				</field>
+				<!-- Not Done -->
+				<field name="featureList" colSpan="6">
+					<viewer>
+						<![CDATA[
+							<strong>{{record.featureList}}</strong>
+						]]>
+					</viewer>
+				</field>
+			</panel>
 		</panel>
 	</form>
+	
+	<action-record name="action-product-onnew" model="com.axelor.product.db.Product">
+		<field name="pvalue" expr="10000"/>
+	</action-record>
 	
 </object-views>

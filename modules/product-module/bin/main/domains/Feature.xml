@@ -8,7 +8,8 @@
   <module package="com.axelor.product.db" name="product"/>
 	
 	<entity name="Feature" lang="java">
-		<string name="feature" title="Features of Product"/>
+		<integer name="sequence" />
+		<string name="feature" title="Features of Product" namecolumn="true"/>
 		
 		<many-to-one ref="com.axelor.product.db.Product" name="product" title="Product Name"/>		
 	</entity>

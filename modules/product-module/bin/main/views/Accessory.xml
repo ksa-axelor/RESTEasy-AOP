@@ -10,10 +10,22 @@
 	</grid>
 	
 	<form model="com.axelor.product.db.Accessory" title="Accessory" name="accessory-form">
-		<panel>
-			<field name="accessory"/>
-			<field name="product"/>
-		</panel>
+		<panel-tabs name="MainPanel">
+			<panel name="tab1" title="Tab 1">
+				<field name="accessory"/>
+				<field name="$dummy" type="boolean" title="Dummy Field" readonly="true"/>
+			</panel>
+			<panel name="tab2" title="Tab 2">
+				<field name="product"/>
+			</panel>
+		</panel-tabs>
+			<panel sidebar="true" name="sidePanel" title="side Panel">
+				<button onClick="action-fill-dummy" name="checkDummy" title="Check Dummy Field"/>
+			</panel>	
 	</form>
+	
+	<action-record name="action-fill-dummy" model="com.axelor.product.db.Accessory">
+		<field name="$dummy" expr="eval: true"/>
+	</action-record>
 	
 </object-views>
