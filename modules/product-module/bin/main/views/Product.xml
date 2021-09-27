@@ -16,44 +16,79 @@
 	
 	<form model="com.axelor.product.db.Product" title="Product" name="product-form" onNew="action-product-onnew" width="large">
 		<panel name="mainPanel">
-			<panel name="mainPanel1" title="Main Panel" colSpan="8">
+			<panel name="mainPanel1" title="Main Panel" colSpan="7">
 				<field name="reference"/>
 				<field name="pname"/>
 				<field name="pvalue"/>
 				<field name="ratingType" showTitle="false" widget="NavSelect" colSpan="8"/>
 			</panel>
-			<panel name="sidePanel" title="Side Panel" colSpan="4" itemSpan="12">
+			
+			<panel name="sidePanel" title="Side Panel" colSpan="5" itemSpan="12">
 				<field name="accessory"/>
 				<panel-related field="featureList" form-view="product_feature_form" grid-view="product_feature_grid" canNew="true" canEdit="true" canRemove="true" 
 				canSuggest="true" showFrame="true" canMove="true" orderBy="sequence" x-selector="checkbox"/>
 			</panel>  
+			
 			<panel name="editorPanel" title="Editor Panel" colSpan="6">
 				<field name="featureList" colSpan="12">
 					<editor x-viewer="true">
 						<field name="feature"/>
+						<field name="product" hidden="true"/>
+					</editor>
+				</field>
+			</panel>
+			
+			<panel name="viewerPanel" title="Viewer Panel">
+				<field name="featureList">
+					<viewer>
+						<![CDATA[
+							<div>
+								<strong>{{record.feature}}</strong>
+							</div>
+							<br>
+						]]>
+					</viewer>
+					<editor>
+						<field name="feature"/>
+					</editor>
+				</field>
+				<field name="featureList" hidden="true">
+					<viewer>
+						<![CDATA[
+							<div>
+								<strong>{{record.product.pname}}</strong>
+							</div>
+							<br>
+						]]>
+					</viewer>
+					<editor>
 						<field name="product"/>
 					</editor>
 				</field>
 			</panel>
-			<panel name="viewerPanel" title="Viewer Panel" colSpan="6">
-				<field name="pname" colSpan="6">
-					<viewer>
-						<![CDATA[
-							<strong>{{record.pname}}</strong>
-						]]>
-					</viewer>
-				</field>
-				<!-- Not Done -->
-				<field name="featureList" colSpan="6">
-					<viewer>
-						<![CDATA[
-							<strong>{{record.featureList}}</strong>
-						]]>
-					</viewer>
-				</field>
-			</panel>
+			
 		</panel>
 	</form>
+	
+	<cards name="product-cards" model="com.axelor.product.db.Product" title="Product Card">
+		<field name="reference"/>
+		<field name="pname"/>
+		<field name="pvalue"/>
+		<field name="ratingType"/>
+		<field name="accessory"/>
+		<field name="featureList"/>
+		<template>
+			<![CDATA[
+				<div>
+   					<strong>Reference ID : {{reference}}</strong><br>
+   					<strong>Product Name : {{pname}}</strong><br>
+   					<strong>Product value : {{pvalue}}</strong><br>
+   					<strong>Product Rating : {{ratingType}}</strong><br>
+   					<strong>Product Accessory : {{accessory.accessory}}</strong>
+				</div>
+			]]>
+		</template>
+	</cards>
 	
 	<action-record name="action-product-onnew" model="com.axelor.product.db.Product">
 		<field name="pvalue" expr="10000"/>

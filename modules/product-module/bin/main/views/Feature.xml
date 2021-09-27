@@ -33,7 +33,7 @@
 		<hilite if="product != null" color="success" />
 		<hilite if="product == null" color="danger" />
 		<field name="feature"/>
-		<field name="product"/>
+		<field name="product" hidden="true"/>
 	</grid>
 	
 </object-views>
